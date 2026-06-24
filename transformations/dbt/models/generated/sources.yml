@@ -1,0 +1,33 @@
+version: 2
+sources:
+- name: int_20260622144856211900_9c8e639e
+  schema: raw_trivtime_prod
+  tables:
+  - name: answers
+    description: ClickHouse source table `raw_trivtime_prod.answers`.
+  - name: avatars
+    description: ClickHouse source table `raw_trivtime_prod.avatars`.
+  - name: lobbies
+    description: ClickHouse source table `raw_trivtime_prod.lobbies`.
+  - name: lobby_players
+    description: ClickHouse source table `raw_trivtime_prod.lobby_players`.
+  - name: match_players
+    description: ClickHouse source table `raw_trivtime_prod.match_players`.
+  - name: matches
+    description: ClickHouse source table `raw_trivtime_prod.matches`.
+  - name: online_queue
+    description: ClickHouse source table `raw_trivtime_prod.online_queue`.
+  - name: profiles
+    description: ClickHouse source table `raw_trivtime_prod.profiles`.
+  - name: question_image_url_backup
+    description: ClickHouse source table `raw_trivtime_prod.question_image_url_backup`.
+  - name: question_served
+    description: ClickHouse source table `raw_trivtime_prod.question_served`.
+  - name: questions
+    description: ClickHouse source table `raw_trivtime_prod.questions`.
+  - name: round_question_image_ready
+    description: ClickHouse source table `raw_trivtime_prod.round_question_image_ready`.
+  - name: round_questions
+    description: ClickHouse source table `raw_trivtime_prod.round_questions`.
+  - name: rounds
+    description: ClickHouse source table `raw_trivtime_prod.rounds`.
