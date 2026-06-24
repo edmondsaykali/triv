@@ -1,0 +1,42 @@
+version: 2
+
+exposures:
+  - name: semantic_mart_daily_player_engagement
+    type: analysis
+    maturity: high
+    description: Daily player engagement KPIs for product and ops review.
+    depends_on:
+      - ref('mart_daily_player_engagement')
+    owner:
+      name: product_ops
+      email: product_ops@example.com
+
+  - name: semantic_mart_player_performance
+    type: analysis
+    maturity: high
+    description: Player-level match outcomes and lifetime performance metrics.
+    depends_on:
+      - ref('mart_player_performance')
+    owner:
+      name: product_ops
+      email: product_ops@example.com
+
+  - name: semantic_mart_question_quality
+    type: analysis
+    maturity: high
+    description: Question-level difficulty and quality metrics from answer submissions.
+    depends_on:
+      - ref('mart_question_quality')
+    owner:
+      name: product_ops
+      email: product_ops@example.com
+
+  - name: semantic_mart_lobby_funnel
+    type: analysis
+    maturity: high
+    description: Daily lobby funnel from created lobbies to started and finished matches.
+    depends_on:
+      - ref('mart_lobby_funnel')
+    owner:
+      name: product_ops
+      email: product_ops@example.com
