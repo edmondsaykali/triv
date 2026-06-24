@@ -18,15 +18,6 @@ from platinur_analytics.mart_matches_summary
 limit 1
 ```
 
-```sql finish_reasons
-select
-    ended_reason,
-    count(*)::float / (select count(*) from platinur_analytics.mart_matches_summary) as rate
-from platinur_analytics.mart_matches_summary
-group by ended_reason
-order by rate desc
-```
-
 <Grid cols="3">
     <BigValue data={kpis} value=total_matches title="Total Matches" />
     <BigValue data={kpis} value=total_players title="Total Players" />
