@@ -1,0 +1,98 @@
+version: 2
+
+semantic_models:
+  - name: player_performance
+    model: ref('mart_player_performance')
+    entities:
+      - name: player
+        type: primary
+        expr: user_id
+    dimensions:
+      - name: profile_created_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: total_profile_wins
+        agg: sum
+        expr: profile_wins
+        agg_time_dimension: profile_created_at
+      - name: total_profile_losses
+        agg: sum
+        expr: profile_losses
+        agg_time_dimension: profile_created_at
+      - name: total_player_completed_matches_played
+        agg: sum
+        expr: completed_matches_played
+        agg_time_dimension: profile_created_at
+      - name: total_player_score
+        agg: sum
+        expr: total_score
+        agg_time_dimension: profile_created_at
+      - name: total_player_match_wins
+        agg: sum
+        expr: match_wins
+        agg_time_dimension: profile_created_at
+      - name: total_player_match_losses
+        agg: sum
+        expr: match_losses
+        agg_time_dimension: profile_created_at
+      - name: total_player_questions_answered
+        agg: sum
+        expr: questions_answered
+        agg_time_dimension: profile_created_at
+      - name: total_player_correct_answers
+        agg: sum
+        expr: correct_answers
+        agg_time_dimension: profile_created_at
+      - name: total_player_questions_served
+        agg: sum
+        expr: questions_served
+        agg_time_dimension: profile_created_at
+
+metrics:
+  - name: profile_wins
+    label: Profile Wins
+    type: simple
+    type_params:
+      measure: total_profile_wins
+  - name: profile_losses
+    label: Profile Losses
+    type: simple
+    type_params:
+      measure: total_profile_losses
+  - name: player_completed_matches_played
+    label: Player Completed Matches Played
+    type: simple
+    type_params:
+      measure: total_player_completed_matches_played
+  - name: player_total_score
+    label: Player Total Score
+    type: simple
+    type_params:
+      measure: total_player_score
+  - name: player_match_wins
+    label: Player Match Wins
+    type: simple
+    type_params:
+      measure: total_player_match_wins
+  - name: player_match_losses
+    label: Player Match Losses
+    type: simple
+    type_params:
+      measure: total_player_match_losses
+  - name: player_questions_answered
+    label: Player Questions Answered
+    type: simple
+    type_params:
+      measure: total_player_questions_answered
+  - name: player_correct_answers
+    label: Player Correct Answers
+    type: simple
+    type_params:
+      measure: total_player_correct_answers
+  - name: player_questions_served
+    label: Player Questions Served
+    type: simple
+    type_params:
+      measure: total_player_questions_served

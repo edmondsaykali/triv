@@ -1,0 +1,176 @@
+version: 2
+
+models:
+  - name: time_spine
+    description: Daily time spine used by the semantic layer for time-grained metrics.
+    config:
+      materialized: table
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        data_type: date
+        granularity: day
+        tests: [not_null, unique]
+      - name: time_spine_key
+        tests: [not_null, unique]
+
+  - name: dim_players
+    description: Conformed player dimension with profile attributes and avatar metadata.
+    columns:
+      - name: user_id
+        tests: [not_null, unique]
+
+  - name: dim_questions
+    description: Conformed question dimension with stable descriptive attributes.
+    columns:
+      - name: question_id
+        tests: [not_null, unique]
+
+  - name: fct_completed_matches
+    description: Completed match participant events at match-player grain (status = 'ended').
+    columns:
+      - name: match_id
+        tests: [not_null]
+      - name: user_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_players')
+                field: user_id
+
+  - name: fct_answers
+    description: Answer submission events enriched with round, match, and question context.
+    columns:
+      - name: answer_id
+        tests: [not_null, unique]
+      - name: user_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_players')
+                field: user_id
+      - name: question_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_questions')
+                field: question_id
+
+  - name: fct_question_served
+    description: Question served events at user-question-match-served_at grain.
+    columns:
+      - name: served_event_id
+        tests: [not_null, unique]
+      - name: user_id
+        tests: [not_null]
+      - name: question_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_questions')
+                field: question_id
+
+  - name: fct_lobby_outcomes
+    description: Lobby lifecycle outcomes linked to any started or completed match.
+    columns:
+      - name: lobby_id
+        tests: [not_null]
+
+  - name: mart_daily_player_engagement
+    description: Daily player engagement metrics for product/ops KPI review.
+    columns:
+      - name: player_day_key
+        tests: [not_null, unique]
+      - name: user_id
+        tests: [not_null]
+      - name: activity_date
+        tests: [not_null]
+
+  - name: mart_player_performance
+    description: Player-level match outcomes and lifetime performance metrics.
+    columns:
+      - name: user_id
+        tests: [not_null, unique]
+      - name: profile_created_at
+        tests: [not_null]
+
+  - name: mart_question_quality
+    description: Question-level difficulty and quality metrics from answer submissions.
+    columns:
+      - name: question_id
+        tests: [not_null, unique]
+      - name: question_created_at
+        tests: [not_null]
+
+  - name: mart_lobby_funnel
+    description: Daily lobby funnel from created lobbies to started and finished matches.
+    columns:
+      - name: activity_date_key
+        tests: [not_null, unique]
+      - name: activity_date
+        tests: [not_null]
+
+  - name: fct_lobbies
+    config:
+      enabled: false
+
+  - name: fct_lobby_players
+    config:
+      enabled: false
+
+  - name: fct_matches
+    config:
+      enabled: false
+
+  - name: fct_match_players
+    config:
+      enabled: false
+
+  - name: fct_round_question_image_ready
+    config:
+      enabled: false
+
+  - name: fct_round_questions
+    config:
+      enabled: false
+
+  - name: fct_rounds
+    config:
+      enabled: false
+
+  - name: mart_answers_summary
+    config:
+      enabled: false
+
+  - name: mart_lobbies_summary
+    config:
+      enabled: false
+
+  - name: mart_match_players_summary
+    config:
+      enabled: false
+
+  - name: mart_matches_summary
+    config:
+      enabled: false
+
+  - name: mart_profiles_summary
+    config:
+      enabled: false
+
+  - name: mart_question_served_summary
+    config:
+      enabled: false
+
+  - name: mart_round_questions_summary
+    config:
+      enabled: false
+
+  - name: mart_rounds_summary
+    config:
+      enabled: false

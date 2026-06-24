@@ -1,0 +1,62 @@
+version: 2
+
+semantic_models:
+  - name: question_quality
+    model: ref('mart_question_quality')
+    entities:
+      - name: question
+        type: primary
+        expr: question_id
+    dimensions:
+      - name: question_created_at
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: total_question_times_served
+        agg: sum
+        expr: times_served
+        agg_time_dimension: question_created_at
+      - name: total_question_times_answered
+        agg: sum
+        expr: times_answered
+        agg_time_dimension: question_created_at
+      - name: total_question_correct_answers
+        agg: sum
+        expr: correct_answers
+        agg_time_dimension: question_created_at
+      - name: avg_question_accuracy_rate
+        agg: average
+        expr: accuracy_rate
+        agg_time_dimension: question_created_at
+      - name: avg_question_answer_distance
+        agg: average
+        expr: avg_distance
+        agg_time_dimension: question_created_at
+
+metrics:
+  - name: question_times_served
+    label: Question Times Served
+    type: simple
+    type_params:
+      measure: total_question_times_served
+  - name: question_times_answered
+    label: Question Times Answered
+    type: simple
+    type_params:
+      measure: total_question_times_answered
+  - name: question_correct_answers
+    label: Question Correct Answers
+    type: simple
+    type_params:
+      measure: total_question_correct_answers
+  - name: question_accuracy_rate
+    label: Question Accuracy Rate
+    type: simple
+    type_params:
+      measure: avg_question_accuracy_rate
+  - name: question_answer_distance
+    label: Question Answer Distance
+    type: simple
+    type_params:
+      measure: avg_question_answer_distance

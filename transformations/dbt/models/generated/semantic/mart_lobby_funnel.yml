@@ -1,0 +1,44 @@
+version: 2
+
+semantic_models:
+  - name: lobby_funnel
+    model: ref('mart_lobby_funnel')
+    entities:
+      - name: activity_date_key
+        type: primary
+        expr: activity_date_key
+    dimensions:
+      - name: activity_date
+        type: time
+        type_params:
+          time_granularity: day
+    measures:
+      - name: total_lobbies_created
+        agg: sum
+        expr: lobbies_created
+        agg_time_dimension: activity_date
+      - name: total_matches_started
+        agg: sum
+        expr: matches_started
+        agg_time_dimension: activity_date
+      - name: total_matches_finished
+        agg: sum
+        expr: matches_finished
+        agg_time_dimension: activity_date
+
+metrics:
+  - name: lobbies_created
+    label: Lobbies Created
+    type: simple
+    type_params:
+      measure: total_lobbies_created
+  - name: matches_started
+    label: Matches Started
+    type: simple
+    type_params:
+      measure: total_matches_started
+  - name: matches_finished
+    label: Matches Finished
+    type: simple
+    type_params:
+      measure: total_matches_finished
