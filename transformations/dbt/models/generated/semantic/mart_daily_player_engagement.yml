@@ -1,83 +1,84 @@
 version: 2
-
 semantic_models:
-  - name: daily_player_engagement
-    model: ref('mart_daily_player_engagement')
-    entities:
-      - name: player_day
-        type: primary
-        expr: player_day_key
-      - name: player
-        type: foreign
-        expr: user_id
-    dimensions:
-      - name: activity_date
-        type: time
-        type_params:
-          time_granularity: day
-    measures:
-      - name: total_daily_completed_matches_played
-        agg: sum
-        expr: completed_matches_played
-        agg_time_dimension: activity_date
-      - name: total_daily_score_earned
-        agg: sum
-        expr: score_earned
-        agg_time_dimension: activity_date
-      - name: total_daily_wins
-        agg: sum
-        expr: wins
-        agg_time_dimension: activity_date
-      - name: total_daily_losses
-        agg: sum
-        expr: losses
-        agg_time_dimension: activity_date
-      - name: total_daily_questions_answered
-        agg: sum
-        expr: questions_answered
-        agg_time_dimension: activity_date
-      - name: total_daily_correct_answers
-        agg: sum
-        expr: correct_answers
-        agg_time_dimension: activity_date
-      - name: total_daily_questions_served
-        agg: sum
-        expr: questions_served
-        agg_time_dimension: activity_date
-
+- name: daily_player_engagement
+  model: ref('mart_daily_player_engagement')
+  entities:
+  - name: player_day
+    type: primary
+    expr: player_day_key
+  - name: player
+    type: foreign
+    expr: user_id
+  dimensions:
+  - name: activity_date
+    type: time
+    type_params:
+      time_granularity: day
+  measures:
+  - name: total_daily_completed_matches_played
+    agg: sum
+    expr: completed_matches_played
+    agg_time_dimension: activity_date
+  - name: total_daily_score_earned
+    agg: sum
+    expr: score_earned
+    agg_time_dimension: activity_date
+  - name: total_daily_wins
+    agg: sum
+    expr: wins
+    agg_time_dimension: activity_date
+  - name: total_daily_losses
+    agg: sum
+    expr: losses
+    agg_time_dimension: activity_date
+  - name: total_daily_questions_answered
+    agg: sum
+    expr: questions_answered
+    agg_time_dimension: activity_date
+  - name: total_daily_correct_answers
+    agg: sum
+    expr: correct_answers
+    agg_time_dimension: activity_date
+  - name: total_daily_questions_served
+    agg: sum
+    expr: questions_served
+    agg_time_dimension: activity_date
 metrics:
-  - name: daily_completed_matches_played
-    label: Daily Completed Matches Played
-    type: simple
-    type_params:
-      measure: total_daily_completed_matches_played
-  - name: daily_score_earned
-    label: Daily Score Earned
-    type: simple
-    type_params:
-      measure: total_daily_score_earned
-  - name: daily_wins
-    label: Daily Wins
-    type: simple
-    type_params:
-      measure: total_daily_wins
-  - name: daily_losses
-    label: Daily Losses
-    type: simple
-    type_params:
-      measure: total_daily_losses
-  - name: daily_questions_answered
-    label: Daily Questions Answered
-    type: simple
-    type_params:
-      measure: total_daily_questions_answered
-  - name: daily_correct_answers
-    label: Daily Correct Answers
-    type: simple
-    type_params:
-      measure: total_daily_correct_answers
-  - name: daily_questions_served
-    label: Daily Questions Served
-    type: simple
-    type_params:
-      measure: total_daily_questions_served
+- name: daily_completed_matches_played
+  label: Daily Completed Matches Played
+  type: simple
+  type_params:
+    measure: total_daily_completed_matches_played
+- name: daily_score_earned
+  label: Daily Score Earned
+  type: simple
+  type_params:
+    measure: total_daily_score_earned
+- name: daily_wins
+  label: Daily Wins
+  type: simple
+  type_params:
+    measure: total_daily_wins
+- name: daily_losses
+  label: Daily Losses
+  type: simple
+  type_params:
+    measure: total_daily_losses
+- name: daily_questions_answered
+  label: Daily Questions Answered
+  type: simple
+  type_params:
+    measure: total_daily_questions_answered
+- name: daily_correct_answers
+  label: Daily Correct Answers
+  type: simple
+  type_params:
+    measure: total_daily_correct_answers
+  meta:
+    platinur:
+      status: deprecated
+- name: daily_questions_served
+  label: Daily Questions Served
+  type: simple
+  type_params:
+    measure: total_daily_questions_served
