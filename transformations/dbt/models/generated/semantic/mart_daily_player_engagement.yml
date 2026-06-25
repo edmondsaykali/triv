@@ -39,6 +39,9 @@ semantic_models:
     agg: sum
     expr: questions_served
     agg_time_dimension: activity_date
+  - name: daily_wins_measure
+    agg: sum
+    expr: wins
 metrics:
 - name: daily_completed_matches_played
   label: Daily Completed Matches Played
@@ -70,3 +73,10 @@ metrics:
   type: simple
   type_params:
     measure: total_daily_questions_served
+- name: daily_wins
+  type: simple
+  type_params:
+    measure:
+      name: daily_wins_measure
+  label: Daily Wins
+  description: Total wins per player per day.
