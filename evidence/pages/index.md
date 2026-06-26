@@ -104,3 +104,7 @@ where completed_match_count > 0 and accuracy_rate is not null
 ```
 
 <Histogram data={accuracy_distribution} x=accuracy_rate title="Distribution of Player Accuracy Rates" />
+
+## Dashboards
+
+- [By Player View New](/by-player-view-new)
