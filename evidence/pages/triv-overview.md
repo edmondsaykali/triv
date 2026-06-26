@@ -1,13 +1,15 @@
 # TRIV Overview
 
-> A comprehensive, real-time pulse of matches, players, questions and lobbies.
+> A high-level pulse of matches and player performance.
 
 ```sql kpis
 select
-    count(distinct match_id) as total_matches,
-    count(distinct case when ended_reason = 'normal' then match_id end) as normal_finished_matches
-from platinur_analytics.mart_matches_summary
+    sum(completed_matches_played) as total_matches,
+    sum(match_wins) as total_wins,
+    sum(match_losses) as total_losses
+from platinur_analytics.mart_player_performance
 ```
 
 <BigValue data={kpis} value=total_matches title="Total Matches" />
-<BigValue data={kpis} value=normal_finished_matches title="Finished Normally" />
+<BigValue data={kpis} value=total_wins title="Total Wins" />
+<BigValue data={kpis} value=total_losses title="Total Losses" />
